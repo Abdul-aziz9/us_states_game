@@ -30,7 +30,7 @@ while game_on:
     score = len(answer_given)
     answer = screen.textinput(f"{score}/50 Correct State", "Give A State Name").title()
     # This is the indentation for when the person leaves the game
-    if answer.lower == "exit":
+    if answer == "Exit":
         samp = data.state.to_list()
         # list comprehended below
         state_dic = {'states you didn\'t mention': [state for state in samp if state not in answer_given]}
@@ -39,7 +39,8 @@ while game_on:
         #         state_dic['states you didn\'t mention'].append(state)
         nudata = pandas.DataFrame(state_dic)
         nudata.to_csv('states_to_learn.csv')
-        break
+        game_on = False
+        screen.bye()
     # This is the indentation for when the user is giving a name of a state 
     if answer in state_list:
         answer_given.append(answer)
